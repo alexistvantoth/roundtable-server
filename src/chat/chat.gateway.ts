@@ -1,10 +1,23 @@
-/* eslint-disable prettier/prettier */
-import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import {
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
+import { Server } from 'http';
+import { Message } from 'src/models/message';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: { origin: ['http://localhost:4200'] } })
 export class ChatGateway {
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    return 'Hello world!';
+  @WebSocketServer()
+  server: Server;
+
+  @SubscribeMessage('sendMessage')
+  handleMessage(client: any, message: Message): void {
+    this.server.emit('newMessage', message);
+  }
+
+  @SubscribeMessage('privateMessage')
+  handlePrivateMessage(client: any, message: Message): void {
+    client.broadcast.to(message.recipient).emit('privateMessage', message);
   }
 }
