@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MessageSchema } from './models/message.model';
 import { ConfigModule } from '@nestjs/config';
 import { ChatController } from './controllers/chat/chat.controller';
+import { ChannelSchema } from './models/channel.model';
 
 @Module({
   imports: [
@@ -14,7 +15,10 @@ import { ChatController } from './controllers/chat/chat.controller';
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/?${process.env.DB_CFG}`,
     ),
-    MongooseModule.forFeature([{ name: 'Message', schema: MessageSchema }]),
+    MongooseModule.forFeature([
+      { name: 'Message', schema: MessageSchema },
+      { name: 'Channel', schema: ChannelSchema },
+    ]),
   ],
   controllers: [AppController, ChatController],
   providers: [AppService, ChatGateway, ChatService],
