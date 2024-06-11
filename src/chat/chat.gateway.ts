@@ -10,7 +10,7 @@ import { ChatService } from './chat.service';
 @WebSocketGateway({
   cors: {
     origin: [
-      'https://roundtable-frontend-fdsxhlkj8-toth-alex-istvans-projects.vercel.app:4200',
+      'https://roundtable-frontend-fdsxhlkj8-toth-alex-istvans-projects.vercel.app',
     ],
   },
 })
