@@ -33,4 +33,12 @@ export class ChatGateway {
 
     this.chatService.createMessage(message);
   }
+
+  // @SubscribeMessage('private message')
+  // handlePrivateMessage(client: any, data: any) {
+  //   client.to(data.to).emit('private message', {
+  //     from: client.id,
+  //     message: data.message,
+  //   });
+  // }
 }
