@@ -7,13 +7,7 @@ import { Message } from 'src/models/message.model';
 import { Server, Socket } from 'socket.io';
 import { ChatService } from './chat.service';
 
-@WebSocketGateway({
-  cors: {
-    origin: [
-      'https://roundtable-frontend-fdsxhlkj8-toth-alex-istvans-projects.vercel.app',
-    ],
-  },
-})
+@WebSocketGateway({ cors: { origin: ['http://localhost:4200'] } })
 export class ChatGateway {
   @WebSocketServer()
   server: Server;
